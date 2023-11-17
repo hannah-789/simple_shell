@@ -121,12 +121,15 @@ int delete_node_at_index(list_t **head, unsigned int index)
     list_t *prev_node = NULL;
     unsigned int i = 0;
 
+    list_t *temp_node;  // Move the declaration here
+
     while (node)
     {
         if (i == index)
         {
             if (prev_node)
                 prev_node->next = node->next;
+
             free(node->str);
             free(node);
             return 1;
@@ -152,9 +155,11 @@ void free_list(list_t **head_ptr)
         return;
 
     list_t *node = *head_ptr;
+    list_t *next_node;  // Move the declaration here
+
     while (node)
     {
-        list_t *next_node = node->next;
+        next_node = node->next;
         free(node->str);
         free(node);
         node = next_node;
